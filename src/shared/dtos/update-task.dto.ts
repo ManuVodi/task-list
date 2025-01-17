@@ -12,4 +12,7 @@ export class UpdateTaskDTO {
     @IsOptional()
     @IsNotEmpty()
     status?: Status;
+
+    @IsOptional()
+    id_list?: number;
 }

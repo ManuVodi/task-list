@@ -22,7 +22,7 @@ export class TaskEntity {
     deleteAt: Date;
 
     @Column({type: "number", nullable: false})
-    is_list: number;
+    id_list: number;
 
     constructor(task?: Partial<TaskEntity>){
         Object.assign(this, task);
