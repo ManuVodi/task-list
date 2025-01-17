@@ -1,0 +1,30 @@
+import { Status } from "src/shared/enums/status.enum";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity({name: 'tasks'})
+export class TaskEntity {
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column({type: "text"})
+    descprition: string;
+
+    @Column({type: "timestamptz"})
+    createdAt: Date;
+
+    @Column({type: "timestamptz"})
+    updateAt: Date;
+
+    @Column({default: Status.A_FAZER})
+    status: Status;
+
+    @Column({type: "timestamptz"})
+    deleteAt: Date;
+
+    @Column({type: "number", nullable: false})
+    is_list: number;
+
+    constructor(task?: Partial<TaskEntity>){
+        Object.assign(this, task);
+    }
+}
