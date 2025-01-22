@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { ITaskRepository } from "../models/interfaces/task-repository.interface";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TaskEntity } from "../models/entities/task.entity";
-import { InsertResult, Repository, Timestamp, UpdateResult } from "typeorm";
+import { InsertResult, Repository, UpdateResult } from "typeorm";
 import { UpdateTaskDTO } from "src/shared/dtos/update-task.dto";
 import { CreateTaskDTO } from "src/shared/dtos/create-task.dto";
 
@@ -40,11 +40,19 @@ export class TaskTypeOrmRepository implements ITaskRepository {
         .execute();
     }
 
-    async find(id_task: number): Promise<TaskEntity[]> {
+    async find_one(id_task: number): Promise<TaskEntity[]> {
         const tasks =  await this.taskRepository
         .createQueryBuilder("tasks")
         .select(["*"])
         .where("id := id_task", {id_task})
+        .getMany()
+        return tasks;
+    }
+
+    async find_all(): Promise<TaskEntity[]> {
+        const tasks =  await this.taskRepository
+        .createQueryBuilder("tasks")
+        .select(["*"])
         .getMany()
         return tasks;
     }
