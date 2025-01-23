@@ -6,7 +6,7 @@ import { TaskModule } from './modules/tasks/task.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(typeOrmConfig), 
+    TypeOrmModule.forRoot(typeOrmConfig),
     ListModule,
     TaskModule
   ],

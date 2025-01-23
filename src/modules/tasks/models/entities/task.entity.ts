@@ -1,7 +1,8 @@
+import { DB_SCHEMA } from "src/shared/config/type-orm.config";
 import { Status } from "src/shared/enums/status.enum";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name: 'tasks'})
+@Entity({schema: DB_SCHEMA, name: 'tasks'})
 export class TaskEntity {
     @PrimaryGeneratedColumn()
     id: number;

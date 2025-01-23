@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export const DB_DATABASE = process.env.DB_DATABASE;
+export const DB_SCHEMA = process.env.DB_SCHEMA;
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
