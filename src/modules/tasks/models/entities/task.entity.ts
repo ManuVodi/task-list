@@ -22,7 +22,7 @@ export class TaskEntity {
     @Column({type: "timestamptz"})
     deleteAt: Date;
 
-    @Column({type: "number", nullable: false})
+    @Column({type: "int", nullable: false})
     id_list: number;
 
     constructor(task?: Partial<TaskEntity>){

@@ -5,7 +5,7 @@ export class ListEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: "varying character"})
+    @Column({type: "character varying"})
     name: string;
 
     @Column({type: "timestamptz"})
