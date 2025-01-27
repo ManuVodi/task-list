@@ -4,9 +4,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskEntity } from './models/entities/task.entity';
 import { CreateTaskUseCase } from './use-cases/create/create-task.use-case';
 import { TaskTypeOrmRepository } from './repositories/task.repository';
-import { FindTaskController } from './use-cases/find/find-task.controller';
-import { FindTaskUseCase } from './use-cases/find/find-task.use-case';
+import { FindAllTaskController } from './use-cases/find-all/find-all-task.controller';
+import { FindAllTaskUseCase } from './use-cases/find-all/find-all-task.use-case';
 import { DB_DATABASE } from 'src/shared/config/type-orm.config';
+import { FindOneTaskController } from './use-cases/find-one/find-one-task.controller';
+import { FindOneTaskUseCase } from './use-cases/find-one/find-one-task.use-case';
 
 
 @Module({
@@ -15,11 +17,13 @@ import { DB_DATABASE } from 'src/shared/config/type-orm.config';
   ],
   controllers: [
     CreateTaskController,
-    FindTaskController
+    FindAllTaskController,
+    FindOneTaskController,
   ],
   providers: [
     CreateTaskUseCase,
-    FindTaskUseCase,
+    FindAllTaskUseCase,
+    FindOneTaskUseCase,
     TaskTypeOrmRepository,
     {
       provide: 'ITaskRepository',
