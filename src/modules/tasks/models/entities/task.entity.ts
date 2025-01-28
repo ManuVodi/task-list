@@ -8,7 +8,7 @@ export class TaskEntity {
     id: number;
 
     @Column({type: "text"})
-    descprition: string;
+    description: string;
 
     @Column({type: "timestamptz"})
     createdAt: Date;
@@ -20,10 +20,10 @@ export class TaskEntity {
     status: Status;
 
     @Column({type: "timestamptz"})
-    deleteAt: Date;
+    deletedAt: Date;
 
     @Column({type: "int", nullable: false})
-    id_list: number;
+    id_lists: number;
 
     constructor(task?: Partial<TaskEntity>){
         Object.assign(this, task);

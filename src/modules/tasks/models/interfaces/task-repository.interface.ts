@@ -6,7 +6,7 @@ import { InsertResult, UpdateResult } from "typeorm";
 export interface ITaskRepository {
     create(task: CreateTaskDTO): Promise<InsertResult>;
     update(id_task: number, task: UpdateTaskDTO): Promise<UpdateResult>;
-    find_one(id_task?: number): Promise<TaskEntity[]>;
+    find_one(id_task?: number): Promise<TaskEntity>;
     find_all(): Promise<TaskEntity[]>;
     delete(id_task: number): Promise<UpdateResult>;
 }

@@ -32,28 +32,44 @@ export class TaskTypeOrmRepository implements ITaskRepository {
         .createQueryBuilder()
         .update()
         .set({
-            descprition: task.description,
+            description: task.description,
             updateAt: task.updateAt,
             status: task.status,
-            id_list: task.id_list
+            id_lists: task.id_list
         })
-        .where("id := id_task", {id_task})
+        .where("id = :id_task", {id_task})
         .execute();
     }
 
-    async find_one(id_task: number): Promise<TaskEntity[]> {
+    async find_one(id_task: number): Promise<TaskEntity> {
         const tasks =  await this.taskRepository
         .createQueryBuilder("tasks")
-        .select(["*"])
-        .where("id := id_task", {id_task})
-        .getMany()
+        .select([
+            "tasks.id", 
+            "tasks.description", 
+            "tasks.createdAt", 
+            "tasks.updateAt", 
+            "tasks.status", 
+            "tasks.deletedAt", 
+            "tasks.id_lists"
+        ])
+        .where("id = :id_task", {id_task})
+        .getOne()
         return tasks;
     }
 
     async find_all(): Promise<TaskEntity[]> {
-        const tasks =  await this.taskRepository
+        const tasks = await this.taskRepository
         .createQueryBuilder("tasks")
-        .select(["*"])
+        .select([
+            "tasks.id", 
+            "tasks.description", 
+            "tasks.createdAt", 
+            "tasks.updateAt", 
+            "tasks.status", 
+            "tasks.deletedAt", 
+            "tasks.id_lists"
+        ])
         .getMany()
         return tasks;
     }
@@ -63,7 +79,7 @@ export class TaskTypeOrmRepository implements ITaskRepository {
         .createQueryBuilder("task")
         .update()
         .set({
-            deleteAt: new Date()
+            deletedAt: new Date()
         })
         .where("id := id_task", {id_task})
         .execute()
