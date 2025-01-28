@@ -1,4 +1,4 @@
-import { Controller, Get, Inject } from "@nestjs/common";
+import { Controller, Get, Inject, Param } from "@nestjs/common";
 import { FindOneTaskUseCase } from "./find-one-task.use-case";
 import { TaskEntity } from "../../models/entities/task.entity";
 
@@ -7,8 +7,8 @@ export class FindOneTaskController {
     @Inject(FindOneTaskUseCase)
     private readonly findOneTaskUseCase: FindOneTaskUseCase;
 
-    @Get('find-one')
-    async findOneTask(id_task: number): Promise<TaskEntity[]>{
+    @Get('find-one/:id_task')
+    async findOneTask(@Param('id_task') id_task: number): Promise<TaskEntity>{
         return await this.findOneTaskUseCase.execute(id_task)
     }
 }

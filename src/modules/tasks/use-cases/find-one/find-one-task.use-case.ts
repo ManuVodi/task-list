@@ -8,7 +8,7 @@ export class FindOneTaskUseCase {
 
     async execute(id_task: number){
         try {
-            const task = this.taskRepository.find_one(id_task)
+            const task = await this.taskRepository.find_one(id_task)
             return task;
         }
         catch(error){

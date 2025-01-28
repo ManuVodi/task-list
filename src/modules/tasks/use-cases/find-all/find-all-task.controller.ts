@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject } from "@nestjs/common";
+import { Controller, Get, Inject } from "@nestjs/common";
 import { FindAllTaskUseCase } from "./find-all-task.use-case";
 import { TaskEntity } from "../../models/entities/task.entity";
 
