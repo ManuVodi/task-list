@@ -4,8 +4,10 @@ import { TaskEntity } from "../../models/entities/task.entity";
 
 @Injectable()
 export class FindAllTaskUseCase {
-        @Inject('ITaskRepository')
-        private taskRepository: ITaskRepository;
+        constructor(
+                @Inject('ITaskRepository')
+                private taskRepository: ITaskRepository
+        ) {}
 
         async execute(): Promise<TaskEntity[]> {
                 try{
@@ -14,7 +16,6 @@ export class FindAllTaskUseCase {
                         return tasks;
                 }
                 catch(error){
-                        console.log(error)
                         throw new InternalServerErrorException("Falha ao buscar todas as tarefas")
                 }
         }

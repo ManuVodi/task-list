@@ -6,8 +6,8 @@ import { Status } from "src/shared/enums/status.enum";
 
 @Injectable()
 export class CreateTaskUseCase {
-    @Inject('ITaskRepository')
-    private taskRepository: ITaskRepository
+        @Inject('ITaskRepository')
+        private taskRepository: ITaskRepository
 
     async execute(task: CreateTaskDTO): Promise<InsertResult> {
         try {
