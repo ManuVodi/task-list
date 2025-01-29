@@ -9,6 +9,8 @@ import { FindAllTaskUseCase } from './use-cases/find-all/find-all-task.use-case'
 import { DB_DATABASE } from 'src/shared/config/type-orm.config';
 import { FindOneTaskController } from './use-cases/find-one/find-one-task.controller';
 import { FindOneTaskUseCase } from './use-cases/find-one/find-one-task.use-case';
+import { DeleteTaskController } from './use-cases/delete/delete-task.controller';
+import { DeleteTaskUseCase } from './use-cases/delete/delete-task.use-case';
 
 
 @Module({
@@ -19,17 +21,21 @@ import { FindOneTaskUseCase } from './use-cases/find-one/find-one-task.use-case'
     CreateTaskController,
     FindAllTaskController,
     FindOneTaskController,
+    DeleteTaskController,
   ],
   providers: [
     CreateTaskUseCase,
     FindAllTaskUseCase,
     FindOneTaskUseCase,
+    DeleteTaskUseCase,
     TaskTypeOrmRepository,
     {
       provide: 'ITaskRepository',
       useExisting: TaskTypeOrmRepository
     }
   ],
-  exports: [],
+  exports: [
+    FindOneTaskUseCase
+  ],
 })
 export class TaskModule {}
