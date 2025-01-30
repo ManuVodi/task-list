@@ -6,7 +6,6 @@ import { InsertResult, Repository, UpdateResult } from "typeorm";
 import { UpdateTaskDTO } from "src/shared/dtos/update-task.dto";
 import { CreateTaskDTO } from "src/shared/dtos/create-task.dto";
 import { DB_DATABASE } from "src/shared/config/type-orm.config";
-import { FindOneTaskDTO } from "src/shared/dtos/find-one-task.dto";
 
 @Injectable()
 export class TaskTypeOrmRepository implements ITaskRepository {
