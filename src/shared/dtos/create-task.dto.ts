@@ -5,9 +5,6 @@ export class CreateTaskDTO {
     @IsNotEmpty()
     description: string;
 
-    @IsNotEmpty()
-    createdAt: Date;
-
     @IsOptional()
     @IsNotEmpty()
     status?: Status;

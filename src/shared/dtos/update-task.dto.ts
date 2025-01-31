@@ -6,9 +6,6 @@ export class UpdateTaskDTO {
     @IsNotEmpty()
     description?: string;
 
-    @IsNotEmpty()
-    updateAt: Date;
-
     @IsOptional()
     @IsNotEmpty()
     status?: Status;

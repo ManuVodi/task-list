@@ -11,7 +11,6 @@ export class CreateTaskUseCase {
 
     async execute(task: CreateTaskDTO): Promise<InsertResult> {
         try {
-            task.createdAt = new Date
             if(!task.status) task.status = Status.A_FAZER
 
             const createTask = await this.taskRepository.create(task) 

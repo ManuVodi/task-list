@@ -1,6 +1,6 @@
 import { DB_SCHEMA } from "src/shared/config/type-orm.config";
 import { Status } from "src/shared/enums/status.enum";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({schema: DB_SCHEMA, name: 'tasks'})
 export class TaskEntity {
@@ -10,16 +10,16 @@ export class TaskEntity {
     @Column({type: "text"})
     description: string;
 
-    @Column({type: "timestamptz"})
+    @CreateDateColumn()
     createdAt: Date;
 
-    @Column({type: "timestamptz"})
+    @UpdateDateColumn()
     updateAt: Date;
 
     @Column({default: Status.A_FAZER})
     status: Status;
 
-    @Column({type: "timestamptz"})
+    @DeleteDateColumn()
     deletedAt: Date;
 
     @Column({type: "int", nullable: false})
