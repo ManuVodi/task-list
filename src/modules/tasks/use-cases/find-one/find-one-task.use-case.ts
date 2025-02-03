@@ -4,7 +4,7 @@ import { ITaskRepository } from "../../models/interfaces/task-repository.interfa
 @Injectable()
 export class FindOneTaskUseCase {
     @Inject('ITaskRepository')
-    private readonly taskRepository: ITaskRepository
+    private taskRepository: ITaskRepository
 
     async execute(id_task: number){
         try {

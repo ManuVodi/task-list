@@ -5,7 +5,7 @@ import { TaskEntity } from "../../models/entities/task.entity";
 @Controller('task')
 export class FindOneTaskController {
     @Inject(FindOneTaskUseCase)
-    private readonly findOneTaskUseCase: FindOneTaskUseCase;
+    private findOneTaskUseCase: FindOneTaskUseCase;
 
     @Get('find-one/:id_task')
     async findOneTask(@Param('id_task') id_task: number): Promise<TaskEntity>{

@@ -3,11 +3,9 @@ import { ITaskRepository } from "../../models/interfaces/task-repository.interfa
 import { TaskEntity } from "../../models/entities/task.entity";
 
 @Injectable()
-export class FindAllTaskUseCase {
-        constructor(
-                @Inject('ITaskRepository')
-                private taskRepository: ITaskRepository
-        ) {}
+export class FindAllTasksUseCase {
+        @Inject('ITaskRepository')
+        private taskRepository: ITaskRepository
 
         async execute(): Promise<TaskEntity[]> {
                 try{

@@ -5,7 +5,7 @@ import { CreateTaskDTO } from "src/shared/dtos/create-task.dto";
 @Controller('task')
 export class CreateTaskController {
     @Inject(CreateTaskUseCase)
-    private readonly createTaskUseCase: CreateTaskUseCase;
+    private createTaskUseCase: CreateTaskUseCase;
 
     @Post('create')
     async createTask(@Body() task: CreateTaskDTO): Promise<void> {
