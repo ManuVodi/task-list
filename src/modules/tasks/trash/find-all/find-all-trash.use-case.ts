@@ -3,13 +3,13 @@ import { ITaskRepository } from "../../models/interfaces/task-repository.interfa
 import { TaskEntity } from "../../models/entities/task.entity";
 
 @Injectable()
-export class FindAllTrashUseCase {
+export class FindAllTasksInTrashUseCase {
     @Inject('ITaskRepository')
     private taskRepository: ITaskRepository;
 
     async execute(): Promise<TaskEntity[]> {
         try{
-            return await this.taskRepository.find_all_trash() 
+            return await this.taskRepository.find_all_in_trash() 
         }
         catch(error){
             throw new InternalServerErrorException("Falha ao buscar todas tarefas da lixeira")
