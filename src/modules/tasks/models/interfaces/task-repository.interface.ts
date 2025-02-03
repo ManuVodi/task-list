@@ -9,4 +9,7 @@ export interface ITaskRepository {
     find_one(id_task: number): Promise<TaskEntity>;
     find_all(): Promise<TaskEntity[]>;
     delete(id_task: number): Promise<void>;
+    find_all_in_trash(): Promise<TaskEntity[]>;
+    find_one_in_trash(id_task: number): Promise<TaskEntity>;
+    restore(id_task: number): Promise<void>;
 }

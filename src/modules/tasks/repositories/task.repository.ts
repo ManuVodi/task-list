@@ -21,7 +21,6 @@ export class TaskTypeOrmRepository implements ITaskRepository {
         .into("tasks")
         .values({
             description: task.description,
-            createdAt: task.createdAt,
             status: task.status
         })
         .execute();
@@ -33,7 +32,6 @@ export class TaskTypeOrmRepository implements ITaskRepository {
         .update()
         .set({
             description: task.description,
-            updateAt: task.updateAt,
             status: task.status,
             id_lists: task.id_list
         })
@@ -44,15 +42,7 @@ export class TaskTypeOrmRepository implements ITaskRepository {
     async find_one(id_task: number): Promise<TaskEntity> {
         const tasks =  await this.taskRepository
         .createQueryBuilder("tasks")
-        .select([
-            "tasks.id", 
-            "tasks.description", 
-            "tasks.createdAt", 
-            "tasks.updateAt", 
-            "tasks.status", 
-            "tasks.deletedAt", 
-            "tasks.id_lists"
-        ])
+        .select()
         .where("id = :id_task", {id_task})
         .getOne()
         return tasks;
@@ -61,27 +51,46 @@ export class TaskTypeOrmRepository implements ITaskRepository {
     async find_all(): Promise<TaskEntity[]> {
         const tasks = await this.taskRepository
         .createQueryBuilder("tasks")
-        .select([
-            "tasks.id", 
-            "tasks.description", 
-            "tasks.createdAt", 
-            "tasks.updateAt", 
-            "tasks.status", 
-            "tasks.deletedAt", 
-            "tasks.id_lists"
-        ])
+        .select()
         .getMany()
         return tasks;
     }
 
     async delete(id_task: number): Promise<void> {
         await this.taskRepository
-        .createQueryBuilder("task")
-        .update()
-        .set({
-            deletedAt: new Date()
-        })
+        .createQueryBuilder("tasks")
+        .softDelete()
         .where("id = :id_task", {id_task})
+        .execute()
+    }
+
+    async find_all_in_trash(): Promise<TaskEntity[]>{
+        const findAllInTrash = await this.taskRepository
+        .createQueryBuilder("tasks")
+        .select()
+        .where("tasks.deletedAt IS NOT NULL")
+        .withDeleted()
+        .getMany()
+        return findAllInTrash;
+    }
+
+    async find_one_in_trash(id_task: number): Promise<TaskEntity>{
+        const findOneInTrash = await this.taskRepository
+        .createQueryBuilder("tasks")
+        .select()
+        .where("id = :id_task", {id_task})
+        .andWhere("tasks.deletedAt IS NOT NULL")
+        .withDeleted()
+        .getOne()
+        return findOneInTrash;
+    }
+
+    async restore(id_task: number): Promise<void>{
+        await this.taskRepository
+        .createQueryBuilder("tasks")
+        .where("deletedAt IS NOT NULL")
+        .andWhere("id = :id_task", {id_task})
+        .restore()
         .execute()
     }
 }
