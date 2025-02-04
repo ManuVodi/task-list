@@ -4,4 +4,5 @@ export class UpdateListDTO {
     @IsOptional()
     @IsString()
     name?: string;
+
 }

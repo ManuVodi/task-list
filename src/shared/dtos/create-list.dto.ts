@@ -4,7 +4,4 @@ export class CreateListDTO {
     @IsNotEmpty()
     @IsString()
     name: string;
-
-    @IsNotEmpty()
-    createdAt: Date;
 }
