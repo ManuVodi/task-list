@@ -6,6 +6,7 @@ import { UpdateListDTO } from "src/shared/dtos/update-list.dto";
 export interface IListRepository {
     create(list: CreateListDTO): Promise<InsertResult>;
     update(id_list: number, list: UpdateListDTO): Promise<UpdateResult>;
-    find(id_list?: number): ListEntity[];
+    find_one(id_list?: number): Promise<ListEntity>;
+    find_all(): Promise<ListEntity[]>;
     delete(id_list: number): Promise<DeleteResult>;
 }
