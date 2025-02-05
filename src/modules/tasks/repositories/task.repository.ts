@@ -9,10 +9,8 @@ import { DB_DATABASE } from "src/shared/config/type-orm.config";
 
 @Injectable()
 export class TaskTypeOrmRepository implements ITaskRepository {
-    constructor(
-        @InjectRepository(TaskEntity, DB_DATABASE)
-        private taskRepository: Repository<TaskEntity>
-    ){}
+    @InjectRepository(TaskEntity, DB_DATABASE)
+    private taskRepository: Repository<TaskEntity>
     
     async create(task: CreateTaskDTO): Promise<InsertResult> {
         return await this.taskRepository
