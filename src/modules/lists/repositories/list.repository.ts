@@ -30,7 +30,7 @@ export class ListTypeOrmRepository implements IListRepository{
         .set({
             name: list.name 
         })
-        .where("id := id_list", {id_list})
+        .where("id = :id_list", {id_list})
         .execute();
     }
 
@@ -38,8 +38,8 @@ export class ListTypeOrmRepository implements IListRepository{
         const list = await this.listRepository
         .createQueryBuilder("lists")
         .select()
-        .where("id := id_list", {id_list})
-        .andWhere("deletedAt IS NULL")
+        .where("id = :id_list", {id_list})
+        .andWhere("lists.deletedAt IS NULL")
         .getOne()
         return list;
     }
@@ -48,7 +48,7 @@ export class ListTypeOrmRepository implements IListRepository{
         const lists = await this.listRepository
         .createQueryBuilder("lists")
         .select()
-        .where("deletedAt IS NULL")
+        .where("lists.deletedAt IS NULL")
         .getMany()
         return lists;
     }
