@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotAcceptableException, NotFoundException } from "@nestjs/common";
+import { Inject, Injectable, InternalServerErrorException, NotAcceptableException, NotFoundException } from "@nestjs/common";
 import { IListRepository } from "../../models/interfaces/list-repository.interface";
 import { ListEntity } from "../../models/entities/list.entity";
 
@@ -18,7 +18,11 @@ export class FindOneListUseCase {
             return foundList;
         }
         catch(error){
+            if (error instanceof NotFoundException) throw new NotFoundException(error.message)
 
+            if (error instanceof NotAcceptableException) throw new NotAcceptableException(error.message)
+                
+            throw new InternalServerErrorException("Falha ao buscar lista")
         }
     }
 }
