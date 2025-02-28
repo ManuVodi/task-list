@@ -14,6 +14,7 @@ export class FindAllListsUseCase {
             return foundLists;
         }
         catch(error){
+            console.log(error)
             throw new InternalServerErrorException("Falha ao buscar todas as listas")
         }
     }
